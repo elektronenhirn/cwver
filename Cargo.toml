@@ -1,0 +1,19 @@
+[package]
+name = "cwver"
+version = "0.1.0"
+authors = ["Florian Bramer <elektronenhirn@gmail.com>"]
+edition = "2018"
+description = "Command line tool to derive calendar date from a calendar week version schema"
+categories = ["command-line-interface"]
+license = "MIT/Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/elektronenhirn/cwver.git"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+chrono = "0.4.19"
+clap = "2.33.3"
+num = "0.4.0"
+im = "15.0.0"
+regex = "1.4.4"
