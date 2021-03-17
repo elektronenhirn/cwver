@@ -42,6 +42,11 @@ Converts a calendar week version string into an ISO date. E.g.:
     ✗ cwver convert 21w05.6
     21w05.6 = 2021-02-06
 
+Or the other way around:
+
+    ✗ cwver convert 2021-02-06
+    2021-02-06 = 21w05.6
+
 ### today
 
 Prints today's date in the calender week format. E.g.

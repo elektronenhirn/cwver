@@ -20,9 +20,9 @@ fn main() -> Result<(), String> {
         )
         .subcommand(
             App::new("convert")
-                .about("Convert cw version string (e.g. 21w45.7) into ISO date.")
+                .about("Convert cw version string (e.g. 21w45.7) into ISO date (2021-11-14) or vice versa.")
                 .arg(
-                    Arg::with_name("cw_ver_str")
+                    Arg::with_name("data_str")
                         .help("cw version string")
                         .index(1)
                         .required(true),
@@ -61,12 +61,18 @@ fn main() -> Result<(), String> {
             Ok(())
         }
         Some("convert") => {
-            let cw_ver_str = matches
+            let date_str = matches
                 .subcommand_matches("convert")
                 .unwrap()
-                .value_of("cw_ver_str")
+                .value_of("data_str")
                 .unwrap();
-            println!("{} = {:?}", cw_ver_str, cwver_str_to_date(cw_ver_str)?);
+            match date_str.contains("w") {
+                true => println!("{} = {:?}", date_str, cwver_str_to_date(date_str)?),
+                false => {
+                    let str_as_date = NaiveDate::parse_from_str(date_str, "%Y-%m-%d").map_err(|_| format!("Failed to parse ISO date {}", date_str))?;
+                    println!("{} = {}", date_str, date_to_cwver_str(&str_as_date));
+                }
+            }
             Ok(())
         }
         Some("bisect") => {
